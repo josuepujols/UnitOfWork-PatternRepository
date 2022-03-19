@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Test.Core.Repositories;
 using Test.Models;
+using Test.DTO;
+using System.Linq.Expressions;
 
 namespace Test.Controllers
 {
@@ -27,7 +29,9 @@ namespace Test.Controllers
         {
             try
             {
-                var result = await _repoUser.GetAll();
+                var result = await _repoUser.GetList(
+                    include: x => x.Gender
+                );
                 return Ok(result);
             }
             catch (Exception e)
@@ -51,7 +55,7 @@ namespace Test.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Insert(User user)
+        public async Task<IActionResult> Insert(UserPostDTO user)
         {
             try
             {
@@ -63,7 +67,16 @@ namespace Test.Controllers
                 }
                 else
                 {
-                    return Ok(await _repoUser.Add(user));
+                    User NewUser = new()
+                    {
+                        Id = user.Id,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        GenderId = user.GenderId,
+                        Gender = null
+                    };
+                    return Ok(await _repoUser.Add(NewUser));
                 }         
             }
             catch(Exception ex)
@@ -73,11 +86,20 @@ namespace Test.Controllers
         }
 
         [HttpPut("Update")]
-        public async Task<IActionResult> Update(User user)
+        public async Task<IActionResult> Update(UserPostDTO user)
         {
             try
             {
-                return Ok(await _repoUser.Update(user));
+                User userToUpdate = new()
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    GenderId = user.GenderId,
+                    Gender = null
+                };
+                return Ok(await _repoUser.Update(userToUpdate));
             }
             catch (Exception ex)
             {
@@ -108,7 +130,10 @@ namespace Test.Controllers
         {
             try
             {
-                var entity = await _repoUser.FindWhere(x => x.FirstName.Contains(Nombre));
+                var entity = await _repoUser.FindWhere(
+                    predicate: x => x.FirstName.Contains(Nombre),
+                    include: x => x.Gender
+                    );
                 return Ok(entity);
             }
             catch (Exception ex)

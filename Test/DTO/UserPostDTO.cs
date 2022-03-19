@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Test.Models
+namespace Test.DTO
 {
-    public class User
+    public class UserPostDTO
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }
@@ -14,8 +13,5 @@ namespace Test.Models
         public string Email { get; set; }
 
         public int GenderId { get; set; }
-
-        [ForeignKey("GenderId")]
-        public Gender Gender { get; set; }
     }
 }

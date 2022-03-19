@@ -59,19 +59,53 @@ namespace Test.Core.Repositories
             return await CommitChanges();
         }
 
-        public async Task<T> FindWhere(Expression<Func<T, bool>> predicate)
+        public async Task<T> FindWhere(Expression<Func<T, bool>> predicate = null, Expression<Func<T, dynamic>> include = null)
         {
-            return await DbSet.FirstOrDefaultAsync(predicate);
+            if (predicate != null && include != null)
+            {
+                return await DbSet.Include(include).Where(predicate).FirstOrDefaultAsync();
+            }
+            if (predicate != null)
+            {
+                return await DbSet.Where(predicate).FirstOrDefaultAsync();
+            }
+            if (include != null)
+            {
+                return await DbSet.Include(include).FirstOrDefaultAsync();
+            }
+
+            return await DbSet.FirstOrDefaultAsync();
+
         }
 
-        public async Task<IEnumerable<T>> GetList(Expression<Func<T, bool>> predicate)
+        public async Task<IEnumerable<T>> GetList(Expression<Func<T, bool>> predicate = null, Expression<Func<T, dynamic>> include = null)
         {
-            return await DbSet.Where(predicate).ToListAsync();
+            if (predicate != null && include != null)
+            {
+                return await DbSet.Include(include).Where(predicate).ToListAsync();
+            }
+            if (predicate != null)
+            {
+                return await DbSet.Where(predicate).ToListAsync();
+            }
+            if (include != null)
+            {
+                return await DbSet.Include(include).ToListAsync();
+            }
+
+            return await DbSet.ToListAsync();
         }
 
         public async Task<bool> Exists(Expression<Func<T, bool>> predicate)
         {
-            return await DbSet.AnyAsync(predicate);
+            if (predicate != null)
+            {
+                return await DbSet.AnyAsync(predicate);
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public async Task<bool> CommitChanges()

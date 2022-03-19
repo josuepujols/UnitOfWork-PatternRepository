@@ -10,8 +10,8 @@ namespace Test.Core.IRepository
     {
         Task<IEnumerable<T>> GetAll();
         Task<T> GetById(Guid Id);
-        Task<T> FindWhere(Expression<Func<T, bool>> predicate);
-        Task<IEnumerable<T>> GetList(Expression<Func<T, bool>> predicate);
+        Task<T> FindWhere(Expression<Func<T, bool>> predicate, Expression<Func<T, dynamic>> selector);
+        Task<IEnumerable<T>> GetList(Expression<Func<T, bool>> predicate, Expression<Func<T, dynamic>> include);
         Task<bool> Add(T entity);
         Task<bool> Delete(Guid Id);
         Task<bool> Update(T entity);
