@@ -18,9 +18,9 @@ namespace Test.Controllers
         private UnitOfWork _unitOfWork;
         private GenericRepository<User> _repoUser;
 
-        public UserController()
+        public UserController(UnitOfWork unitOfWork)
         {
-            _unitOfWork = new UnitOfWork();
+            _unitOfWork = unitOfWork;
             _repoUser = _unitOfWork.Repository<User>();
         }
 
@@ -36,7 +36,7 @@ namespace Test.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error al recuperar datos de la base de datos.");
+                return StatusCode(StatusCodes.Status500InternalServerError,e );
             }
         }
 

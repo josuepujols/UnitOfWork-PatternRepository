@@ -18,12 +18,5 @@ namespace Test.Data
 
         }
 
-        public ApplicationDbContext()
-        {
-            
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlServer("Server=MSI\\SQLEXPRESS;Database=UnitOfWork; User Id=sa;password=Manzana005;Trusted_Connection=True;MultipleActiveResultSets=True;");
     }
 }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Web Develoment\\ASP.NET\\Test\\Test\\Test.csproj": {}
+    "C:\\Users\\frank\\Source\\Repos\\UnitOfWork-PatternRepository\\Test\\Test.csproj": {}
   },
   "projects": {
-    "C:\\Web Develoment\\ASP.NET\\Test\\Test\\Test.csproj": {
+    "C:\\Users\\frank\\Source\\Repos\\UnitOfWork-PatternRepository\\Test\\Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Web Develoment\\ASP.NET\\Test\\Test\\Test.csproj",
+        "projectUniqueName": "C:\\Users\\frank\\Source\\Repos\\UnitOfWork-PatternRepository\\Test\\Test.csproj",
         "projectName": "Test",
-        "projectPath": "C:\\Web Develoment\\ASP.NET\\Test\\Test\\Test.csproj",
-        "packagesPath": "C:\\Users\\Josue Pujols\\.nuget\\packages\\",
-        "outputPath": "C:\\Web Develoment\\ASP.NET\\Test\\Test\\obj\\",
+        "projectPath": "C:\\Users\\frank\\Source\\Repos\\UnitOfWork-PatternRepository\\Test\\Test.csproj",
+        "packagesPath": "C:\\Users\\frank\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\frank\\Source\\Repos\\UnitOfWork-PatternRepository\\Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Josue Pujols\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\frank\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -65,7 +65,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -77,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

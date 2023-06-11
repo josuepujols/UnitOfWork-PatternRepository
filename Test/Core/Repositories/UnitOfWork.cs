@@ -13,35 +13,33 @@ namespace Test.Core.Repositories
         private Dictionary<string, object> repositories;
         public DbContext Db { get; }
 
-        public UnitOfWork()
+        public UnitOfWork(DbContextOptions<ApplicationDbContext> opt)
         {
-            Db = new ApplicationDbContext();
-        }   
+            Db = new ApplicationDbContext(opt);
+        }
 
         public GenericRepository<T> Repository<T>() where T : class
         {
-            if (repositories == null)
+            if (Singleton.Instance.repositories == null)
             {
-                repositories = new Dictionary<string, object>();
+                Singleton.Instance.repositories = new Dictionary<string, object>();
             }
 
             var type = typeof(T).Name;
 
-            if (!repositories.ContainsKey(type))
+            if (!Singleton.Instance.repositories.ContainsKey(type))
             {
                 var repositoryType = typeof(GenericRepository<>);
-                object repositoryInstance = null;
-
-                repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), Db);
-                repositories.Add(type, repositoryInstance);
-
+                object repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), Db);
+                Singleton.Instance.repositories.Add(type, repositoryInstance);
             }
 
-            return (GenericRepository<T>)repositories[type];
+            return (GenericRepository<T>)Singleton.Instance.repositories[type];
         }
+
         public void Dispose()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

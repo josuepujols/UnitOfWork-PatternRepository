@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Test.Core.Repositories;
 using Test.Data;
 
 namespace Test
@@ -29,13 +30,11 @@ namespace Test
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddScoped<UnitOfWork>();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DevConnection"))
             );
-
-            services.AddEntityFrameworkSqlServer()
-           .AddDbContext<ApplicationDbContext>(options =>
-              options.UseSqlServer(Configuration["Data:DevConnection:Connectionstring"]));
 
             services.AddSingleton(c => Configuration);
 
